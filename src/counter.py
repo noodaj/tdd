@@ -26,7 +26,6 @@ def update_count(name):
 
     COUNTERS[name] += 1
 
-    COUNTERS.get()
     return {name: COUNTERS[name]}, status.HTTP_200_OK
 
 
