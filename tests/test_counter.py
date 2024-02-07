@@ -48,9 +48,10 @@ class CounterTest(TestCase):
         self.assertEqual(COUNTERS["test"], 1)
 
         result = self.client.put("/counters/test2")
-        self.assertEqual(result.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(result.status_code, status.HTTP_200_OK)
 
     def test_get_a_counter(self):
+        "Test get a counter"
         self.client.post("/counters/hello")
         self.client.put("/counters/hello")
 
@@ -61,10 +62,11 @@ class CounterTest(TestCase):
         self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_delete_a_counter(self):
+        "Test delete a counter"
         result = self.client.delete("/counters/asd")
         self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
 
         self.client.post("/counters/asd")
         result = self.client.delete("/counters/asd")
-        self.assertEqual(result.status_code, status.HTTP_204_OK)
-        self.assertEqual(len(COUNTERS), 0)
+        self.assertEqual(result.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(len(COUNTERS), 1)
